@@ -35,7 +35,8 @@ class Offert(models.Model):
         ('1', '$'),
         ('2', 'R$'),
     )
-    id_costumer = models.ForeignKey(Client, on_delete = models.CASCADE, verbose_name = "ID Cliente")
+
+    costumer = models.ForeignKey(Client, on_delete = models.CASCADE, verbose_name = "Cliente")
     From = models.CharField("De", max_length=30)
     to = models.CharField("Para", max_length = 30)
     initial_value = models.FloatField("Valor inicial", max_length=10)
@@ -44,4 +45,17 @@ class Offert(models.Model):
     amount_type = models.CharField("Un. de medida", choices = options, default = "1", max_length = 4)
 
     def __str__(self):
-        return "{} - {}".format(self.pk, self.name)
+        return "{} - {}".format(self.pk, "Offert")
+
+class Bid(models.Model):
+
+    provider = models.ForeignKey(Company, on_delete = models.CASCADE, verbose_name = "Empresa")
+
+    offer = models.ForeignKey(Offert, on_delete = models.CASCADE, verbose_name = "Oferta")
+
+    value = models.FloatField("Valor", max_length=10)
+
+    amount = models.FloatField("Quantidade", max_length=10)
+
+    def __str__(self):
+        return "{} - {}".format(self.pk, "Bid")
