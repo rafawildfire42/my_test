@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from my_app.views import ClientView, CompanyView, OffertView, BidView
-from my_site.views import clients
+from my_site.views import clients, clients_post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +18,7 @@ urlpatterns = [
     path("api/bid/<int:pk>", BidView.as_view()),
     path("api/bid/", BidView.as_view()),
 
-    ## views frontend
-    path("client/", clients)
+    ##views frontend
+    path("client/", clients),
+    path("client/post/", clients_post)
 ]

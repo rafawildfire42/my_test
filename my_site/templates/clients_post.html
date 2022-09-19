@@ -5,25 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <input type="number" name="name" id="name"><br/>
-    <input type="text" name="doc" id="doc"><br/>
-    <input type="text" name="about" id="about"><br/>
-    <input type="text" name="site" id="site"><br/>
-    <input type="checkbox" name="active" id="active"><br/>
+    Nome: <br/> <input type="text" name="name" id="name"><br/>
+    Doc:  <br/> <input type="text" name="doc" id="doc"><br/>
+    Sobre:<br/> <input type="text" name="about" id="about"><br/>
+    Site: <br/><input type="text" name="site" id="site"><br/>
+    Ativo:<input type="checkbox" class ="check" id="active" value="true"><br/>
     <input type="button" value="Cadastrar" onclick=clicar()><br/>
     <div id="texto"> </div>
     <script>
         function clicar(){
-            var texto = document.querySelector("div#texto")
-            var name = document.querySelector("input#name")
-            var doc = document.querySelector("input#doc")
-            var about = document.querySelector("input#about")
-            var site = document.querySelector("input#site")
-            var checkbox = document.querySelector("checkbox#active")
-            var n = Number(name.value)
-            texto.innerHTML = `${n}`
+            var texto = document.querySelector("#texto")
+            var name_ = document.querySelector("#name")
+            var doc_ = document.querySelector("#doc")
+            var about_ = document.querySelector("#about")
+            var site_ = document.querySelector("#site")
+            var checkbox_ = document.querySelector("#active")
+            var dados = {
+                name: name_.value,
+                doc: doc_.value,
+                about: about_.value,
+                site: site_.value,
+                active: checkbox_.checked
+            }
+            texto.innerHTML = `${checkbox_.checked}`
+            /*const http = new XMLHttpRequest()
+            http.open('POST', '/api/client/')
+            http.setRequestHeader('Content-type', 'application/json')
+            http.send(JSON.stringify(dados))  Make sure to stringify
+            */
+            $.ajax({
+                url: "/api/client/",
+                method: "POST",
+                data: JSON.stringify(dados)
+            })
         }
     </script>
 </body>
