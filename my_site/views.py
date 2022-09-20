@@ -17,3 +17,11 @@ def offert(request):
     
 def offert_post(request):
     return render(request, "offert_post.html")     
+
+def bid(request):
+    return render(request, "bid.html")     
+
+def bid_post(request):
+    return render(request, "bid_post.html")     
+
+

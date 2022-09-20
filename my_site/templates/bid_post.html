@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de lances</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        body{
+            font: normal 14pt Arial;
+        }
+        [name = "campo"]{
+            font: normal 12pt Arial;
+            width: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <h1><storng>Cadastro de lances</storng></h1>
+    ID Empresa: <br/> <input type="text" name="campo" id="idprovider"><br/>
+    ID Oferta:  <br/> <input type="text" name="campo" id="idoffert"><br/>
+    Valor: <br/> <input type="text" name="campo" id="value"><br/>
+    Quantidade: <br/><input type="text" name="campo" id="amount"><br/>
+
+    <input type="button" value="Cadastrar" id="button"><br/>
+    <div id="texto"> </div>
+    <script>
+        $("#button").on("click", function() {
+            var texto = document.querySelector("#texto")
+            var idprovider_ = document.querySelector("#idprovider")
+            var idoffert_ = document.querySelector("#idoffert")
+            var value_ = document.querySelector("#value")
+            var amount_ = document.querySelector("#amount")
+
+            var dados = {
+                provider: idprovider_.value,
+                offert: idoffert_.value,
+                value: value_.value,
+                amount: amount_.value
+            }
+            $.ajax({
+                url: "/api/bid/",
+                method: "POST",
+                data: JSON.stringify(dados),
+                success: function (response){
+                texto.innerHTML = "Oferta cadastrada com sucesso."
+                },
+                error: function(){
+                    texto.innerHTML = "Falha ao realizar o cadastro."
+                }
+            })
+        })
+    </script>
+</body>
+</html>

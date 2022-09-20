@@ -56,10 +56,20 @@ class Offert(models.Model):
         return f"{self.id}"
 
 class Bid(models.Model):
+    provider_ = []
+    offert_ = []
+    for j in list(Company.objects.all()):
+        provider_.append((str(j.id), str(j.id)))
 
-    provider = models.ForeignKey(Company, on_delete = models.CASCADE, verbose_name = "Empresa")
+    for k in list(Offert.objects.all()):
+        offert_.append((str(k.id), str(k.id)))
 
-    offer = models.ForeignKey(Offert, on_delete = models.CASCADE, verbose_name = "Oferta")
+    provider_ = tuple(provider_)
+    offert_ = tuple(offert_)
+
+    provider = models.CharField(max_length=50, choices=provider_, verbose_name = "Provider id")
+
+    offert = models.CharField(max_length=50, choices=offert_, verbose_name = "Offert id")
 
     value = models.FloatField("Valor", max_length=10)
 

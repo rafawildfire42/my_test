@@ -85,7 +85,7 @@ class CompanyView(View):
 
 class OffertView(View):
     def post(self, request: HttpRequest) -> HttpResponse:
-        import ipdb; ipdb.set_trace()
+        #import ipdb; ipdb.set_trace()
         data = json.loads(request.body)
         try:
             offert = Offert.objects.create(**data)
@@ -124,6 +124,7 @@ class OffertView(View):
 
 class BidView(View):
     def post(self, request: HttpRequest) -> HttpResponse:
+        import ipdb; ipdb.set_trace()
         data = json.loads(request.body)
         try:
             bid = Bid.objects.create(**data)
@@ -133,6 +134,7 @@ class BidView(View):
             return JsonResponse({"error": "falha ao criar", "detail": str(error)}, status=406)
     
     def get(self, request: HttpRequest, pk=None) -> HttpResponse:
+
         if pk:
             try:
                 bid = Bid.objects.get(pk=pk)
