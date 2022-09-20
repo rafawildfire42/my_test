@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <title>Visualização das ofertas</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Visualização das ofertas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">id cliente</th>
+          <th scope="col">de</th>
+          <th scope="col">para</th>
+          <th scope="col">valor inicial</th>
+          <th scope="col">tipo valor</th>
+          <th scope="col">quantidade</th>
+          <th scope="col">tipo quantidade</th>
+        </tr>
+      </thead>
+      <tbody id="clients">
+
+      </tbody>
+    </table>
+  </div>
+  <div id="texto"></div>
+  <script>
+    function process_companies(response) {
+      response.forEach(element => {
+        if(element.value_type == "2"){var moeda = "R$"}else{var moeda = "$"}
+        if(element.amount_type == "1"){
+          var tipo = "ton"
+        }else if(element.amount_type == "2"){
+          var tipo = "kg"
+        }else if(element.amount_type == "3"){
+          var tipo = "g"
+        }else{
+          var tipo = "un"
+        }
+        $("#clients").append(
+          `<tr>
+          <th scope = "row" > ${element.id}</th>
+          <td>${element.costumer}</td>
+          <td>${element.From}</td>
+          <td>${element.to}</td>
+          <td>${element.initial_value}</td>
+          <td>${moeda}</td>
+          <td>${element.amount}</td>
+          <td>${tipo}</td>
+        </tr >`
+        )
+      });
+    }
+    $(document).ready(() => {
+      $.ajax({
+        url: "/api/offert",
+        method: "GET",
+        success: process_companies
+      })
+    })
+  </script>
+</body>
+
+</html>

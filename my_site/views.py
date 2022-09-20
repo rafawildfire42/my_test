@@ -5,3 +5,15 @@ def clients(request):
 
 def clients_post(request):
     return render(request, "clients_post.html") 
+
+def company(request):
+    return render(request, "company.html")     
+
+def company_post(request):
+    return render(request, "company_post.html")     
+
+def offert(request):
+    return render(request, "offert.html")    
+    
+def offert_post(request):
+    return render(request, "offert_post.html")     

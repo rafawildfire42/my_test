@@ -1,3 +1,7 @@
+from csv import list_dialects
+from re import S
+from tokenize import String
+from xml.dom.expatbuilder import Rejecter
 from django.db import models
 
 class Client(models.Model):
@@ -8,7 +12,7 @@ class Client(models.Model):
     site = models.CharField("Site", max_length=14)
 
     def __str__(self):
-        return "{} - {}".format(self.pk, self.name)
+        return "{}".format(self.pk)
 
 class Company(models.Model):
     name = models.CharField("Nome", max_length=30)
@@ -35,8 +39,12 @@ class Offert(models.Model):
         ('1', '$'),
         ('2', 'R$'),
     )
+    clients = []
+    for j in list(Client.objects.all()):
+        clients.append((str(j.id), str(j.id)))
+    clients = tuple(clients)
 
-    costumer = models.ForeignKey(Client, on_delete = models.CASCADE, verbose_name = "Cliente")
+    costumer = models.CharField(max_length=50, choices=clients, verbose_name = "Cliente id")
     From = models.CharField("De", max_length=30)
     to = models.CharField("Para", max_length = 30)
     initial_value = models.FloatField("Valor inicial", max_length=10)
@@ -45,7 +53,7 @@ class Offert(models.Model):
     amount_type = models.CharField("Un. de medida", choices = options, default = "1", max_length = 4)
 
     def __str__(self):
-        return "{} - {}".format(self.pk, "Offert")
+        return f"{self.id}"
 
 class Bid(models.Model):
 

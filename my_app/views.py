@@ -8,7 +8,7 @@ from .models import Client, Company, Offert, Bid
 
 class ClientView(View):
     def post(self, request: HttpRequest) -> HttpResponse:
-        import ipdb; ipdb.set_trace()
+        #import ipdb; ipdb.set_trace()
         data = json.loads(request.body)
         try:
             client = Client.objects.create(**data)
@@ -85,6 +85,7 @@ class CompanyView(View):
 
 class OffertView(View):
     def post(self, request: HttpRequest) -> HttpResponse:
+        import ipdb; ipdb.set_trace()
         data = json.loads(request.body)
         try:
             offert = Offert.objects.create(**data)

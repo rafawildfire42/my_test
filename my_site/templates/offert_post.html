@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de ofertas</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        body{
+            font: normal 14pt Arial;
+        }
+        [name = "campo"]{
+            font: normal 12pt Arial;
+            width: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <h1><storng>Cadastro de ofertas</storng></h1>
+    ID Cliente: <br/> <input type="text" name="campo" id="idclient"><br/>
+    De:  <br/> <input type="text" name="campo" id="from"><br/>
+    Para:<br/> <input type="text" name="campo" id="to"><br/>
+    Valor inicial: <br/><input type="text" name="campo" id="initialvalue"><br/>
+    Moeda:
+    <select name="moeda" id="coin">
+    <option value="1">$</option>
+    <option value="2">R$</option>
+    </select><br/>
+    Quantidade: <br/><input type="text" name="campo" id="amount"><br/>
+    Tipo de quantidade: 
+    <select name="tipos" id="amounttype">
+    <option value="1">ton</option>
+    <option value="2">kg</option>
+    <option value="3">g</option>
+    <option value="4">un</option>
+    </select><br/>
+
+    <input type="button" value="Cadastrar" id="button"><br/>
+    <div id="texto"> </div>
+    <script>
+        $("#button").on("click", function() {
+            var texto = document.querySelector("#texto")
+            var idclient_ = document.querySelector("#idclient")
+            var from_ = document.querySelector("#from")
+            var to_ = document.querySelector("#to")
+            var initialvalue_ = document.querySelector("#initialvalue")
+            var coin_ = document.querySelector("#coin")
+            var amount_ = document.querySelector("#amount")
+            var amounttype_ = document.querySelector("#amounttype")
+            var dados = {
+                costumer: idclient_.value,
+                From: from_.value,
+                to: to_.value,
+                initial_value: initialvalue_.value,
+                value_type: coin_.value,
+                amount: amount_.value,
+                amount_type: amounttype_.value
+            }
+            $.ajax({
+                url: "/api/offert/",
+                method: "POST",
+                data: JSON.stringify(dados),
+                success: function (response){
+                texto.innerHTML = "Oferta cadastrada com sucesso."
+                },
+                error: function(){
+                    texto.innerHTML = "Falha ao realizar o cadastro."
+                }
+            })
+        })
+    </script>
+</body>
+</html>

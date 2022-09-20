@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de clientes</title>
+    <title>Cadastro de empresas</title>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <h1><storng>Cadastro de clientes</storng></h1>
+    <h1><storng>Cadastro de empresas</storng></h1>
     Nome: <br/> <input type="text" name="campo" id="name"><br/>
     Doc:  <br/> <input type="text" name="campo" id="doc"><br/>
     Sobre:<br/> <input type="text" name="campo" id="about"><br/>
@@ -41,12 +41,13 @@
                 site: site_.value,
                 active: checkbox_.checked
             }
+            
             $.ajax({
-                url: "/api/offert/",
+                url: "/api/company/",
                 method: "POST",
                 data: JSON.stringify(dados),
                 success: function (response){
-                texto.innerHTML = "Cliente cadastrado com sucesso."
+                texto.innerHTML = "Empresa cadastrada com sucesso."
                 },
                 error: function(){
                     texto.innerHTML = "Falha ao realizar o cadastro."
