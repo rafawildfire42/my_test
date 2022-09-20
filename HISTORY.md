@@ -6,4 +6,21 @@ ao JavaScript.
 
 É possível fazer diversas melhorias, principalmente, em relação a parte de tratamento de erros. Como, por exemplo, retornar com mais clareza para o usuário onde está 
 o erro. Poderia também ser desenvolvido um algoritmo para relacionar os melhores lances em relação as ofertas, visto que ambos recebem diversos parâmetros.
+Poderia ser desenvolvida uma interface para visualizar cada oferta separada com os lances realizados para cada uma.
+No algoritmo, a visualização ficou simples e resumida a uma tabela.
 
+Ao executar o comando "python manage.py runserver" no terminal, será possível acessar os seguintes endereços.
+
+Visualizar (get):
+http://localhost:8000/offert
+http://localhost:8000/bid
+http://localhost:8000/client
+http://localhost1:8000/company
+
+Cadastrar (post):
+http://localhost:8000/offert/post
+http://localhost:8000/bid/post
+http://localhost:8000/client/post
+http://localhost:8000/company/post
+
+Atenciosamente, Rafael Fontenele
